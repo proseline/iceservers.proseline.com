@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "dependencies": {
+    "pino": "^4.13.0",
+    "twilio": "^3.12.0"
+  }
+}
