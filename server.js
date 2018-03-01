@@ -41,8 +41,11 @@ if (twilioClient) {
 
 var VALID_ORIGIN = /^https?:\/\/localhost(:|$)/
 
+var logger = require('pino-http')({logger: log})
+
 http.createServer()
   .on('request', function (request, response) {
+    logger(request, response)
     var parsed = url.parse(request.url)
     if (parsed.pathname === '/_servers') {
       var origin = request.headers.origin
