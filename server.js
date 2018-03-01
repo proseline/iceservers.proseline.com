@@ -38,8 +38,6 @@ if (twilioClient) {
   log.error('no Twilio client')
 }
 
-var VALID_ORIGIN = /^https?:\/\/localhost(:|$)/
-
 var logger = require('pino-http')({logger: log})
 
 http.createServer()
@@ -47,12 +45,12 @@ http.createServer()
     logger(request, response)
     if (request.url === '/_servers') {
       var origin = request.headers.origin
-      if (VALID_ORIGIN.test(origin)) {
+      if (!servers) {
+        response.statusCode = 500
+        respone.end()
+      } else {
         response.setHeader('Content-Type', 'application/json')
         response.end(JSON.stringify(servers))
-      } else {
-        response.setStatus = 500
-        response.end()
       }
     } else {
       response.setStatus = 404
