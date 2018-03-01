@@ -1,7 +1,6 @@
 var http = require('http')
 var log = require('pino')()
 var twilio = require('twilio')
-var url = require('url')
 
 var servers
 var twilioClient
@@ -46,8 +45,7 @@ var logger = require('pino-http')({logger: log})
 http.createServer()
   .on('request', function (request, response) {
     logger(request, response)
-    var parsed = url.parse(request.url)
-    if (parsed.pathname === '/_servers') {
+    if (request.url === '/_servers') {
       var origin = request.headers.origin
       if (VALID_ORIGIN.test(origin)) {
         response.setHeader('Content-Type', 'application/json')
