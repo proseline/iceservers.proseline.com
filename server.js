@@ -26,6 +26,7 @@ function fetchServers () {
       }
       return server
     })
+    log.info(servers, 'servers')
   })
 }
 
